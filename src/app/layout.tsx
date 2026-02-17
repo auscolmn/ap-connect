@@ -1,21 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Header } from "@/components/Header";
+import { Plus_Jakarta_Sans, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-display",
   subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "AP Connect | Authorised Prescriber Referral Network",
-  description: "Connect with verified Authorised Prescribers for psychedelic-assisted therapy referrals. For Australian health professionals.",
+  title: "AP Connect | Australia's Authorised Prescriber Network",
+  description: "Find verified psychiatrists authorised to prescribe psilocybin and MDMA for treatment-resistant depression and PTSD. For Australian health professionals.",
+  keywords: ["authorised prescriber", "psychedelic therapy", "psilocybin", "MDMA", "TRD", "PTSD", "psychiatrist", "Australia"],
+  openGraph: {
+    title: "AP Connect | Australia's Authorised Prescriber Network",
+    description: "Find verified psychiatrists authorised to prescribe psilocybin and MDMA for treatment-resistant conditions.",
+    url: "https://apconnect.com.au",
+    siteName: "AP Connect",
+    locale: "en_AU",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -24,44 +36,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" className="scroll-smooth">
+      <body className={`${plusJakarta.variable} ${instrumentSerif.variable} font-sans antialiased`}>
+        {children}
       </body>
     </html>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-border bg-muted/50 py-8">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} AP Connect. A service by Psychedelic Institute Australia.
-          </p>
-          <p className="text-xs text-muted-foreground">
-            For Australian health professionals only. Not intended for consumers.
-          </p>
-          <div className="flex gap-4">
-            <a href="/privacy" className="text-sm text-muted-foreground hover:text-foreground">
-              Privacy
-            </a>
-            <a href="/terms" className="text-sm text-muted-foreground hover:text-foreground">
-              Terms
-            </a>
-            <a href="/contact" className="text-sm text-muted-foreground hover:text-foreground">
-              Contact
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
   );
 }
